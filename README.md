@@ -15,5 +15,6 @@ Commands:
 - /join ROOM      ----- join single room
 - /leave          ----- leave your room
 - /quit           ----- quit this chat application
+- /whisper USER   ----- send USER a private message
 
 [1]: http://twistedmatrix.com/trac/
