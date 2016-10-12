@@ -72,7 +72,7 @@ class Chat(LineReceiver):
         elif not self.user_manager.if_user_exist(name):
             self.sendLine("[System] No this user")
             return
-        self.sendLine("[System] You next message will be sent to %s" % (name,))
+        self.sendLine("[System] Your next message will be sent to %s" % (name,))
         self.whisper_user = name
 
     def quit(self):
@@ -83,12 +83,12 @@ class Chat(LineReceiver):
 
     def join_room(self, room):
         if not self.user_manager.if_room_exist(room):
-            self.sendLine("[System] No this room")
+            self.sendLine("[System] No room")
             return
         self.room = room
         self.user_manager.add_user_to_room(self.room, self.name)
-        self.sendLine("[System] You have join chat %s" % (self.room, ))
-        message = " * new user joined chat: %s" % (self.name,)
+        self.sendLine("[System] You have joined chat %s" % (self.room, ))
+        message = " * New user joined chat: %s" % (self.name,)
         self.send_to_room(message)
 
     def show_rooms_list(self):
@@ -100,7 +100,7 @@ class Chat(LineReceiver):
                 message += "[System] * %s (%s) \n" % (room, len(users))
             message += "[System] end of list"
         else:
-            message = "[System] No rooms here"
+            message = "[System] No such room"
         self.sendLine(message)
 
     def show_users_list(self):
@@ -130,14 +130,14 @@ class Chat(LineReceiver):
 
     def create_room(self, room):
         if self.room:
-            self.sendLine("[System] You have to leave this rooms at first")
+            self.sendLine("[System] You have to leave this room at first")
             return
         self.user_manager.add_room(room)
-        self.sendLine("[System] Room %s is created" % self.room)
+        self.sendLine("[System] Room %s has been created" % self.room)
         self.join_room(room)
 
     def leave_room(self):
-        message = " * user has left chat: %s" % (self.room,)
+        message = " * User has left chat: %s" % (self.room,)
         self.send_to_room(message)
         self.user_manager.leave_room(self.name)
         self.room = None
@@ -155,10 +155,10 @@ class Chat(LineReceiver):
     def handle_msg(self, message):
         if self.whisper_user:
             self.send_whisper(message)
-            self.sendLine("[System] whisper sent")
+            self.sendLine("[System] Whisper sent")
         elif self.room:
             self.send_to_users(self.user_manager.get_room_users(self.room), message)
-            self.sendLine("[System] room message sent")
+            self.sendLine("[System] Room message sent")
         else:
             self.wrong_cmd()
 
