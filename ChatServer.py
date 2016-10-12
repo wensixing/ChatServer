@@ -83,7 +83,7 @@ class Chat(LineReceiver):
 
     def join_room(self, room):
         if not self.user_manager.if_room_exist(room):
-            self.sendLine("[System] No room")
+            self.sendLine("[System] No such room")
             return
         self.room = room
         self.user_manager.add_user_to_room(self.room, self.name)
@@ -100,7 +100,7 @@ class Chat(LineReceiver):
                 message += "[System] * %s (%s) \n" % (room, len(users))
             message += "[System] end of list"
         else:
-            message = "[System] No such room"
+            message = "[System] No room"
         self.sendLine(message)
 
     def show_users_list(self):
@@ -133,7 +133,7 @@ class Chat(LineReceiver):
             self.sendLine("[System] You have to leave this room at first")
             return
         self.user_manager.add_room(room)
-        self.sendLine("[System] Room %s has been created" % self.room)
+        self.sendLine("[System] Room %s has been created" % room)
         self.join_room(room)
 
     def leave_room(self):
