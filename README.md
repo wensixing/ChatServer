@@ -7,6 +7,7 @@ Library:
 Usage:
 - Server : start the server with "python ChatServer.py". It will start on port 8988
 - Client : connect with telnet to the server ip and port to start chatting.
+
 Server:
 ```
 python ChatServer.py
